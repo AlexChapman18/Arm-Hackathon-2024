@@ -7,7 +7,7 @@ def main():
     if(len(sys.argv) != 2):
         print("please put the file as an argument:)")
         exit(1)
-        
+
     input_file = sys.argv[1]
     if(not os.path.exists(input_file)):
         print("file does not exist")
@@ -19,6 +19,7 @@ def main():
     regex_pattern = "(?<=\$ )(?:cd (.*?)[\n\r])|(?:ls[\r\n](.*?)(?:(?=\$)|(?:$(?![\r\n]))))"
 
     matches = re.findall(regex_pattern, content, re.MULTILINE | re.IGNORECASE | re.DOTALL)
+    #current directory
     cur_dir = []
     for match in matches:
         print(match)
@@ -30,26 +31,33 @@ def main():
         #if it is a directory or directory traversal
         if(dir_dirtrav):
             # three cases:
-            # a Directory Traversal Backwards 
+            # a Directory Traversal Backwards
+            # cd .. 
             if(dir_dirtrav == ".."):
                 cur_dir.pop()
             # b. Go to root
             elif(dir_dirtrav[0] == "/"):
                 if(len(dir_dirtrav) == 1):
                     cur_dir = []
+                # Go to root and traverse
                 else:
                     cur_dir = []
                     dir_list = dir_dirtrav.split("/")[1:]
                     for dir in dir_list: 
                         cur_dir.append(dir + "/")
-            # c. Directory
+            # c. Directory Traversal
             else:
+                # Single directory traversal
+                # cd a
                 if(len(dir_dirtrav) == 1):
                     cur_dir.append(dir_dirtrav + "/")
+                # Multi directory traversal
+                # cd a/b
                 else:
                     dir_list = dir_dirtrav.split("/")
                     for dir in dir_list:
                         cur_dir.append(dir + "/")
+        #ls command
         else:
             file_dir_list = file_or_dir.strip().split("\n")
             for file_dir in file_dir_list:
