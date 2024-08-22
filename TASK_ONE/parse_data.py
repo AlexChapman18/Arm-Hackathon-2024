@@ -1,11 +1,19 @@
+import sys
+import os
 import re
 
 def main():
     depth_path_dict = {}
-    paths = set()
-    depths = []
+    if(len(sys.argv) != 2):
+        print("please put the file as an argument:)")
+        exit(1)
+        
+    input_file = sys.argv[1]
+    if(not os.path.exists(input_file)):
+        print("file does not exist")
+        exit(1)
 
-    with open("example.txt", "r") as input_file:
+    with open(input_file, "r") as input_file:
         content = input_file.read()
     
     regex_pattern = "(?<=\$ )(?:cd (.*?)[\n\r])|(?:ls[\r\n](.*?)(?:(?=\$)|(?:$(?![\r\n]))))"
