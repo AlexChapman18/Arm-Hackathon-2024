@@ -1,8 +1,8 @@
 $ cd /
 $ ls
 dir a
-14848514 b.txt
-8504156 c.dat
+1484851 b.txt
+850415 c.dat
 dir d
 $ cd a
 $ ls
@@ -21,3 +21,15 @@ $ ls
 8033020 d.log
 5626152 d.ext
 7214296 k
+$ cd /x/y
+$ ls
+406013 hehe
+80330330 haha
+5626112 meme
+721424 check
+$ cd /a
+$ ls
+dir e
+29116 f
+2557 g
+62596 h.lst
