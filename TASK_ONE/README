@@ -1,0 +1,6 @@
+```
+sudo apt install libboost-dev
+cmake -S . 
+make
+./task
+```
